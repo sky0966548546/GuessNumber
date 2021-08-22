@@ -1,43 +1,61 @@
-var a=0;
-var b=Math.floor(Math.random() * 101);
-var c;
-$(document).ready(function(){
-    $("#bt1").click(function(){a=10*a+1; $("#a1").text(a);});
-    $("#bt2").click(function(){a=10*a+2; $("#a1").text(a);});
-    $("#bt3").click(function(){a=10*a+3; $("#a1").text(a);});
-    $("#bt4").click(function(){a=10*a+4; $("#a1").text(a);});
-    $("#bt5").click(function(){a=10*a+5; $("#a1").text(a);});
-    $("#bt6").click(function(){a=10*a+6; $("#a1").text(a);});
-    $("#bt7").click(function(){a=10*a+7; $("#a1").text(a);});
-    $("#bt8").click(function(){a=10*a+8; $("#a1").text(a);});
-    $("#bt9").click(function(){a=10*a+9; $("#a1").text(a);});
-    $("#bt0").click(function(){a=10*a+0; $("#a1").text(a);});
-    $("#btc").click(function(){a=0; $("#a1").text(a);});
-    $("#btbk").click(function(){a=parseInt(a/10); $("#a1").text(a);});
-    $("#bto").click(function(){
+let a = 0;
+let b = Math.floor(Math.random() * 101);
+$(document).ready(() => {
+    // 輸入答案
+    $("#bt1").click(() => input(1));
+    $("#bt2").click(() => input(2));
+    $("#bt3").click(() => input(3));
+    $("#bt4").click(() => input(4));
+    $("#bt5").click(() => input(5));
+    $("#bt6").click(() => input(6));
+    $("#bt7").click(() => input(7));
+    $("#bt8").click(() => input(8));
+    $("#bt9").click(() => input(9));
+    $("#bt0").click(() => input(0));
+    $("#btc").click(() => other(0));
+    $("#btbk").click(() => other(parseInt(a/10)));
+    
+    //判斷答案
+    $("#bto").click(() => {
         if (a > b) {
-            c="太大";
-          $("#a1").text(c);
-          $("#a1").css('color','red');
+            $("#a1").text("太大");
+            $("#a1").css("color", "red");
         }
         else if (a < b) {
-            c="太小";
-          $("#a1").text(c);
-          $("#a1").css('color','green');
+            $("#a1").text("太小");
+            $("#a1").css("color", "green");
         }
         else if (a = b) {
-            c="嘟嘟好";
-          $("#a1").text(c);
+            $("#a1").text("嘟嘟好");
+            $("#a1").css("color", "blue");
         }
         a=0;
-  });
-  $("#btop").click(function(){
-    $("#a2").text(b);
-    $("#a2").css("color","red");
-  });
-  $("#btrp").click(function(){
-    b=Math.floor(Math.random() * 101);
-    $("#a1").text(a);
-    $("#a2").html("<span id='a2'></span>");
-  });
+    });
+    
+    // 顯示答案
+    $("#btop").click(() => {
+        $("#a2").text(b);
+        $("#a2").css("color", "red");
+    });
+
+    // 重新開始
+    $("#btrp").click(() => {
+        b=Math.floor(Math.random() * 101);
+        other(0);
+        $("#a2").text("");
+    });
 });
+
+// 輸入答案
+input = q => {
+    $("#a1").css("color",'black');
+    a = 10 * a + q;
+    $("#a1").text(a);
+}
+
+// 其他功能
+other = as => {
+    a = as;
+    $("#a1").css("color",'black');
+    $("#a1").text(a);
+}
